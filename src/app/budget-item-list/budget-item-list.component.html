@@ -4,7 +4,7 @@
     <div cdkDropList class="budget-items"  (cdkDropListDropped)="drop($event)">
       <div *ngFor="let item of budgetItems" cdkDrag>
         <app-budget-item-card
-          *ngIf="item.amount >= 0"
+          *ngIf="item.type === 'INCOME'"
           [item]="item"
           (xButtonClick)="OnDeleteButtonClicked(item)"
           (cardClick)="onCardClicked(item)"
@@ -18,7 +18,7 @@
     <div class="budget-items">
       <div *ngFor="let item of budgetItems" cdkDrag>
         <app-budget-item-card
-          *ngIf="item.amount < 0"
+          *ngIf="item.type === 'EXPENSE'"
           [item]="item"
           (xButtonClick)="OnDeleteButtonClicked(item)"
           (cardClick)="onCardClicked(item)"

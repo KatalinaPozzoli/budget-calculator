@@ -1,4 +1,4 @@
-<form #itemForm="ngForm" (ngSubmit)="onSubmit(itemForm)">
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field is-narrow">
@@ -9,29 +9,28 @@
             placeholder="Amount"
             name="amount"
             required
-            [ngModel]="item.amount"
+            formControlName="amount"
           />
         </p>
       </div>
       <div class="field">
-        <p class="control">
+        <label class="control">
           <input
             type="text"
             class="input form-input form-input__description"
             placeholder="Description"
             name="description"
             required
-            [ngModel]="item.description"
+            formControlName="description"
           />
-        </p>
+        </label>
       </div>
       <div class="field is-narrow">
         <div class="control">
           <button
             class="button is-primary form-button"
             style=" font-weight: bold"
-            [ngClass]="{ 'is-primary': !isNewItem, 'is-success': isNewItem }"
-            [disabled]="!itemForm.valid ? 'disabled' : null"
+            [disabled]="!form.valid ? 'disabled' : null"
           >
             {{ isNewItem ? "Add" : "Save" }}
           </button>
@@ -40,3 +39,12 @@
     </div>
   </div>
 </form>
+<div class="field is-horizontal switch-section">
+  <p class="switch-section__income-option">Income</p>
+  <label class="switch">
+    <input type="checkbox" [(ngModel)]="checked">
+    <span class="slider round">
+  </span>
+  </label>
+  <p class="switch-section__expense-option">Expense</p>
+</div>

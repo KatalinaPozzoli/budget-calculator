@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { BudgetItem } from '../shared/models/budget-item.models';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {BudgetItem} from '../shared/models/budget-item.models';
 
 @Component({
   selector: 'app-add-item-form',
@@ -12,21 +12,28 @@ export class AddItemFormComponent implements OnInit {
   @Output()
   formSubmit: EventEmitter<BudgetItem> = new EventEmitter<BudgetItem>();
 
-  isNewItem: boolean;
-  constructor() {}
+  form = new FormGroup({
+    description: new FormControl(),
+    amount: new FormControl()
+  });
+
+  isNewItem = true;
+
+  checked = true;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
     if (this.item) {
       this.isNewItem = false;
-    } else {
-      this.isNewItem = true;
-      this.item = new BudgetItem('', null);
+      this.form.patchValue({description: this.item.description, amount: this.item.amount});
     }
   }
 
   // tslint:disable-next-line:typedef
-  onSubmit(form: NgForm) {
-    this.formSubmit.emit(form.value);
-    form.reset();
+  onSubmit() {
+    this.formSubmit.emit(new BudgetItem(this.form.value.description, this.form.value.amount, this.checked ? 'EXPENSE' : 'INCOME'));
+    this.form.reset();
   }
 }

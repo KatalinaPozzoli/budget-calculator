@@ -19,19 +19,25 @@ export class MainPageComponent implements OnInit {
 
   addItem(newItem: BudgetItem): void {
     this.budgetItems.push(newItem);
-    this.totalBudget += newItem.amount;
+    this.recalculate();
   }
 
   deleteItem(item: BudgetItem): void {
     const index = this.budgetItems.indexOf(item);
     this.budgetItems.splice(index, 1);
-    this.totalBudget -= item.amount;
+    this.recalculate();
   }
 
   updateItem(updateEvent: UpdateEvent): void {
     this.budgetItems[this.budgetItems.indexOf(updateEvent.old)] =
       updateEvent.new;
-    this.totalBudget -= updateEvent.old.amount;
-    this.totalBudget += updateEvent.new.amount;
+    this.recalculate();
+  }
+
+  recalculate(): void {
+    this.totalBudget = this.budgetItems.reduce((total, item) => {
+      const discriminator = item.type === 'INCOME' ? 1 : -1;
+      return total + item.amount * discriminator;
+    }, 0);
   }
 }
