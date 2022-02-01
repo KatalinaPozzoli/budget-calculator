@@ -16,6 +16,7 @@
       margin-top: 0;
       display: flex;
       flex-direction: column;
+      align-items: center;
       flex-basis: 0;
       flex-grow: 1;
 
@@ -28,6 +29,7 @@
       .budget-items {
         display: flex;
         flex-direction: column;
+
         app-budget-item-card {
           margin-top: 20px;
         }

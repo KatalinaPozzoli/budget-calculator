@@ -33,9 +33,9 @@
 
   .budget-item {
     display: flex;
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
+    min-width: 150px;
+    padding: 8px;
+    border-radius: 12px;
     background-color: $light-grey;
     cursor: pointer;
 
@@ -47,7 +47,6 @@
     .description {
       display: flex;
       align-items: center;
-      margin-left: 5px;
       flex-grow: 1;
       font-size: 16px;
     }
@@ -62,17 +61,30 @@
   .income {
     p {
       color: $green;
+      width: 100%;
+      margin: 0;
     }
     .amount {
       background-color: $light-green;
+      margin: 0;
     }
   }
   .expense {
     p {
       color: $red;
+      width: 100%;
+      margin: 0;
     }
     .amount {
       background-color: $light-red;
+      margin: 0;
+    }
+  }
+}
+@media (min-width:600px) {
+  :host{
+    .budget-item {
+      min-width: 260px;
     }
   }
 }

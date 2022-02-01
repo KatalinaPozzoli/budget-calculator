@@ -5,8 +5,7 @@
         <p class="control">
           <input
             type="number"
-            style="width: 100px"
-            class="input"
+            class="input form-input"
             placeholder="Amount"
             name="amount"
             required
@@ -18,7 +17,7 @@
         <p class="control">
           <input
             type="text"
-            class="input"
+            class="input form-input form-input__description"
             placeholder="Description"
             name="description"
             required
@@ -29,7 +28,8 @@
       <div class="field is-narrow">
         <div class="control">
           <button
-            class="button is-primary"
+            class="button is-primary form-button"
+            style=" font-weight: bold"
             [ngClass]="{ 'is-primary': !isNewItem, 'is-success': isNewItem }"
             [disabled]="!itemForm.valid ? 'disabled' : null"
           >
